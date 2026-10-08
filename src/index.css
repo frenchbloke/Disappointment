@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/*
+  Dieter Rams / Braun palette, used as he would have wanted it: Braun White as
+  the single housing tone, Warm Black for all typography, Pebble for interactive
+  surfaces, and Signal Red reserved solely for the beats that get removed.
+  There is no second accent.
+*/
+@theme {
+  /* Inter: neo-grotesque, closest widely-available match to Akzidenz-Grotesk. */
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Surfaces */
+  --color-housing: #f0ede5; /* Braun White - the ground */
+  --color-panel: #f7f5f1; /* raised card */
+  --color-recess: #e6e3dc; /* inset fields, sliders */
+  --color-control: #c5c3be; /* Pebble - buttons, inputs */
+  --color-control-hi: #b3b0a9; /* Pebble hover */
+
+  /* Lines */
+  --color-line: #d6d3cb;
+  --color-line-hi: #b3b0a9;
+
+  /* Ink - Warm Black is the only text colour; grey is de-emphasis */
+  --color-ink: #1a1a18;
+  --color-ink-2: #2e2e2c; /* Anthracite */
+  --color-ink-3: #55554f;
+  --color-ink-4: #7a7a77;
+
+  /* Signal Red - the cut, and only the cut */
+  --color-signal: #c02820;
+  --color-signal-hi: #a6211a;
+  --color-signal-ink: #a6211a;
+  --color-signal-ink-2: #8e2019;
+  --color-signal-wash: #f0c9c5;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #f0ede5; /* Braun White */
+    color: #1a1a18; /* Warm Black */
+    overflow-x: hidden;
+  }
+
+  input[type="range"] {
+    accent-color: #2e2e2c; /* neutral dark bar; the thumb is overridden below */
+  }
+
+  /* Signal Red marks the slider handle only, leaving the track neutral. */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #c02820;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #c02820;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  /* The UI used a monospace face for every figure. Now that it renders in a
+     proportional grotesque, force tabular numerals so readouts do not jitter. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
